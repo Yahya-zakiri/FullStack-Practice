@@ -11,13 +11,6 @@ The primary goal of this repo is to document my growth, test new layouts, practi
 *   **JavaScript (ES6+):** Async programming (Promises, Async/Await), DOM manipulation, API fetching, array methods, event handling, and data structures.
 *   **React:** Functional components, hooks (`useState`, `useEffect`, custom hooks), state management, routing, and building reusable UI architectures.
 
-## 📂 Repository Structure
-
-The project is organized incrementally to isolate different concepts:
-*   `/html-css-basics` — Pure layout practice, styling foundations, and static page layouts.
-*   `/tailwind-sandbox` — Quick UI components, custom landing pages, and responsive design drills using Tailwind.
-*   `/vanilla-js-apps` — Dynamic web applications built with native JavaScript (e.g., calculators, weather widgets, todo apps).
-*   `/react-projects` — Modern web apps featuring state management, hooks, and scalable component structures.
 
 ## 🚀 Key Learning Objectives
 *   Mastering standard design-to-code conversions.
