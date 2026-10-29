@@ -1,0 +1,26 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading__animation {
+    margin: 10px auto 10px auto;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    border: 5px solid rgba(164, 166, 165, 0.623);
+    border-left-color: rgb(73, 73, 255);
+    border-top-color: rgb(73, 73, 255);
+    border-radius: 50%;
+    animation: rotate infinite ease 600ms; 
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
