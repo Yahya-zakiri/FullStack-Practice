@@ -72,3 +72,7 @@ button:not(.key-equal):hover {
     cursor: pointer;
     background: rgba(255, 1, 1, 0.959);
 }
+
+.highlighted {
+    background: rgba(0, 255, 17, 0.949);
+}
