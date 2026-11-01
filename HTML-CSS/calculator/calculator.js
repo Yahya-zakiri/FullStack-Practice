@@ -4,6 +4,8 @@ const display = calculator.querySelector('.calculator-display');
 
 
 keys.addEventListener('click', e => {
+    
+
     if(e.target.matches('button')) {
         const key = e.target;
         const action = key.dataset.action;
@@ -12,13 +14,15 @@ keys.addEventListener('click', e => {
 
         Array.from(key.parentNode.children)
       .forEach(k => k.classList.remove('highlighted'));
+      
+      if (!action){
+            const previousKeyType = calculator.dataset.previousKeyType;
 
-        if (!action){
-            if(displayContent === '0') {
-                display.textContent = keyContent;
-            } else {
-                display.textContent = displayContent + keyContent;
-            }
+            if (displayContent === '0' || previousKeyType === 'operator') {
+                    display.textContent = keyContent;
+                } else {
+                    display.textContent = displayContent + keyContent;
+                }
         }
 
         if(
@@ -28,14 +32,21 @@ keys.addEventListener('click', e => {
             action === 'divide'
         ) {
             key.classList.add('highlighted');
+
+            calculator.dataset.previousKeyType = 'operator';
+
+
         }
 
         if(action === 'decimal') {
-            display.textContent = displayContent + '.';
+            console.log(display.textContent.includes('.'))
+            if( !(display.textContent.includes('.')) ) {
+                display.textContent = displayContent + '.';
+            }
         }
 
         if(action === 'clear') {
-            console.log('clear key!');
+            display.textContent = '0';
         }
 
         if(action === 'calculate') {
