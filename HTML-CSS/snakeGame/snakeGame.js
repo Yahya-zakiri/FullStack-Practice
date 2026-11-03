@@ -18,7 +18,20 @@ const advanceSnake = () => {
     snake.pop();
 }
 
+const upSnake = () => {
+    const head = {x: snake[0].x, y: snake[0].y - dx}
+    snake.unshift(head);
+    snake.pop();
+}
+
 const drawSnake = () => {snake.forEach(drawSnakePart)};
 
+
+const clearCanvas = () => {
+    ctx.fillStyle = "white";  ctx.strokeStyle = "black";
+    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);  ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+}
+
+setTimeout(() => {clearCanvas(); advanceSnake(); drawSnake();}, 100);
 
 drawSnake();
