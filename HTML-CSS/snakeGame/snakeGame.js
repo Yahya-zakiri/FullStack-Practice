@@ -4,7 +4,7 @@ let dx = 10;
 let dy = 0;
 let foodX = 0;
 let foodY = 0;
-let changingDirection = false;
+let changingDirection;
 let snake = [{x:150, y:150}];
 const scoreHolder = document.getElementById('score');
 let score = 0;
@@ -17,7 +17,7 @@ main();
 document.addEventListener("keydown", changeDirection);
 
 function main() {
-    setTimeout(() => {clearCanvas(); drawFood(); advanceSnake();  drawSnake();
+    setTimeout(() => {clearCanvas(); changingDirection = false; drawFood(); advanceSnake();  drawSnake();
          
         if (gameOver()){
             title.innerText = 'Game Over!'
@@ -73,7 +73,8 @@ function drawSnake() {
 
 function clearCanvas() {
     ctx.fillStyle = "white";  ctx.strokeStyle = "black";
-    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);  ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);  
+    ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
 
@@ -89,14 +90,15 @@ function changeDirection (event)  {
     const goingDown = dy === 10;
     const goingLeft = dx === -10;
     const goingRight = dx === 10;
-    
-    // if(changeDirection) return;
 
-    // changingDirection = true;
+    if(changingDirection) return;
+
+    changingDirection = true;
 
     if(keyPressed === LEFT_KEY && !goingRight) {
         dx = -10;
         dy = 0;
+
     }
 
     if(keyPressed === RIGHT_KEY && !goingLeft) {
