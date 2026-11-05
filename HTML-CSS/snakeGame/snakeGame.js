@@ -4,50 +4,62 @@ let dx = 10;
 let dy = 0;
 let foodX = 0;
 let foodY = 0;
-
+const changingDirection = false;
 let snake = [{x:150, y:150}];
+const scoreHolder = document.getElementById('score');
+let score = 0;
 
+createFood();
+main();
+
+document.addEventListener("keydown", changeDirection);
 
 function main() {
     setTimeout(() => {clearCanvas(); drawFood(); advanceSnake();  drawSnake(); main()}, 100);
 }
-const randomTen = (min, max) => {return Math.round((Math.random() * (max - min) + min) / 10) * 10;}
+function randomTen(min, max) {return Math.round((Math.random() * (max - min) + min) / 10) * 10;}
 
 
 
-const drawSnakePart = snakePart => {
+function drawSnakePart(snakePart) {
     ctx.fillStyle = 'lightgreen';
+    ctx.fillRect(snakePart.x[0], snakePart[0], 50, 50);
+    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeStyle = 'darkgreen';
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-const advanceSnake = () => {
+function advanceSnake() {
+    let foodIsOnSnake = ((snake[0].x == foodX) && (snake[0].y == foodY));
     const head = {x:snake[0].x + dx, y: snake[0].y + dy};
-    const tail = {x: snake[snake.length - 1].x + 10, y: snake[snake.length - 1].y + 10}
+
     snake.unshift(head);
     snake.pop();
-    snake.forEach(part => {
-        const foodIsOnSnake = ((part.x == foodX) && (part.y == foodY));
-        
-        if(foodIsOnSnake){
-            snake.push(tail);
+
+
+    if(foodIsOnSnake){
+            score += 10;
+            snake.push(head);
             createFood();
+            scoreHolder.innerText = score;
         }
-    });
+
 }
 
-const drawSnake = () => {snake.forEach(drawSnakePart)};
+function drawSnake() {
+    snake.forEach(drawSnakePart)
+};
 
 
-const clearCanvas = () => {
+function clearCanvas() {
     ctx.fillStyle = "white";  ctx.strokeStyle = "black";
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);  ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
 
 
-const changeDirection = event => {
+function changeDirection (event)  {
     const LEFT_KEY = 37;
     const RIGHT_KEY = 39;
     const UP_KEY = 38;
@@ -59,6 +71,10 @@ const changeDirection = event => {
     const goingLeft = dx === -10;
     const goingRight = dx === 10;
     
+    // if(changeDirection) return;
+
+    // changingDirection = true;
+
     if(keyPressed === LEFT_KEY && !goingRight) {
         dx = -10;
         dy = 0;
@@ -81,9 +97,8 @@ const changeDirection = event => {
 }
 
 
-document.addEventListener("keydown", changeDirection);
 
-const createFood = () => {
+function createFood() {
     foodX = randomTen(0, gameCanvas.width - 10);
     foodY = randomTen(0, gameCanvas.height - 10);
     }
@@ -94,5 +109,7 @@ const createFood = () => {
         ctx.fillRect(foodX, foodY, 10, 10);
         ctx.strokeRect(foodX, foodY, 10, 10);
     }
-    createFood();
-    main();
+
+function gameOver() {
+    clearCanvas();
+}
