@@ -133,13 +133,12 @@ function createFood() {
 
 function gameOver() {
     
-    if(snake.length > 4)
-    {for(let i = 1; i < snake.length; i++){
+    for(let i = 1; i < snake.length; i++){
         const colided = (snake[0].x === snake[i].x && snake[0].y === snake[i].y);
         if (colided) {
             return true;
         }
-    }}
+    }
 
     const hitLeftWall = snake[0].x < 0;
     const hitRightWall = snake[0].x > gameCanvas.width - 10;
